@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Styling with jQuery</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Base styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            transition: all 0.3s ease;
+            padding: 30px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        .control-panel {
+            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .sample-controls {
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        /* --- Theme 1: Light Mode (Default) --- */
+        .theme-light {
+            background-color: #f8f9fa;
+            color: #212529;
+        }
+        .theme-light .control-panel, .theme-light .sample-controls {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .theme-light button, .theme-light input, .theme-light select {
+            background-color: #e9ecef;
+            color: #495057;
+            border: 1px solid #ced4da;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-light button:hover {
+            background-color: #dde2e6;
+        }
+
+        /* --- Theme 2: Dark Mode --- */
+        .theme-dark {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+        .theme-dark .control-panel, .theme-dark .sample-controls {
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .theme-dark button, .theme-dark input, .theme-dark select {
+            background-color: #333333;
+            color: #ffffff;
+            border: 1px solid #555555;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .theme-dark button:hover {
+            background-color: #444444;
+        }
+
+        /* --- Theme 3: Neon / Cyberpunk Mode --- */
+        .theme-neon {
+            background-color: #050505;
+            color: #00ff00;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .theme-neon .control-panel, .theme-neon .sample-controls {
+            background-color: #111111;
+            border: 2px solid #00ff00;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.2);
+        }
+        .theme-neon button, .theme-neon input, .theme-neon select {
+            background-color: #000000;
+            color: #00ff00;
+            border: 2px solid #00ff00;
+            padding: 10px 15px;
+            border-radius: 0px;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-weight: bold;
+            transition: all 0.2s ease;
+        }
+        .theme-neon button:hover {
+            background-color: #00ff00;
+            color: #000000;
+            box-shadow: 0 0 10px #00ff00;
+        }
+    </style>
+</head>
+<body class="theme-light">
+
+    <h2>jQuery Style Switcher</h2>
+
+    <div class="control-panel">
+        <h3>Select Theme</h3>
+        <!-- The three buttons used to switch styles -->
+        <button id="btn-theme-light">Light Theme</button>
+        <button id="btn-theme-dark">Dark Theme</button>
+        <button id="btn-theme-neon">Neon Theme</button>
+    </div>
+
+    <div class="sample-controls">
+        <h3>Sample Form Controls</h3>
+        <p>Notice how all these controls instantly change their appearance when you click the buttons above.</p>
+        
+        <div style="margin-bottom: 15px;">
+            <label for="sample-input">Text Input: </label>
+            <input type="text" id="sample-input" placeholder="Type something here...">
+        </div>
+        
+        <div style="margin-bottom: 15px;">
+            <label for="sample-select">Dropdown: </label>
+            <select id="sample-select">
+                <option>Option A</option>
+                <option>Option B</option>
+                <option>Option C</option>
+            </select>
+        </div>
+
+        <div>
+            <button>Generic Action 1</button>
+            <button>Generic Action 2</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // 1. Button click event for Light Theme
+            $('#btn-theme-light').click(function() {
+                // Remove any existing theme classes from the body and apply the new one
+                $('body').removeClass().addClass('theme-light');
+            });
+
+            // 2. Button click event for Dark Theme
+            $('#btn-theme-dark').click(function() {
+                $('body').removeClass().addClass('theme-dark');
+            });
+
+            // 3. Button click event for Neon Theme
+            $('#btn-theme-neon').click(function() {
+                $('body').removeClass().addClass('theme-neon');
+            });
+        });
+    </script>
+</body>
+</html>
