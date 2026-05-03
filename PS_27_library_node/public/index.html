@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Library Management</h1>
+            <p>Manage your book collection easily.</p>
+        </header>
+
+        <main>
+            <section class="add-book-section glass-panel">
+                <h2>Add a New Book</h2>
+                <form id="add-book-form">
+                    <div class="form-group">
+                        <label for="title">Book Title</label>
+                        <input type="text" id="title" placeholder="Enter book title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="author">Author</label>
+                        <input type="text" id="author" placeholder="Enter author name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="year">Publication Year</label>
+                        <input type="number" id="year" placeholder="e.g. 2023" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Add Book</button>
+                </form>
+                <div id="form-message" class="message hidden"></div>
+            </section>
+
+            <section class="book-list-section glass-panel">
+                <h2>Book Collection</h2>
+                <div class="table-responsive">
+                    <table id="books-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Year</th>
+                            </tr>
+                        </thead>
+                        <tbody id="books-tbody">
+                            <!-- Books will be injected here via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
