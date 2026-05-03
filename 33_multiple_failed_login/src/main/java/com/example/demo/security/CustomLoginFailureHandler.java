@@ -1,0 +1,48 @@
+package com.example.demo.security;
+
+import com.example.demo.entity.User;
+import com.example.demo.service.UserService;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.LockedException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.stereotype.Component;
+
+import java.io.IOException;
+
+@Component
+public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHandler {
+
+    @Autowired
+    private UserService userService;
+
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response,
+                                        AuthenticationException exception) throws IOException, ServletException {
+        
+        String username = request.getParameter("username");
+        User user = userService.getByUsername(username);
+
+        if (user != null) {
+            if (user.isAccountNonLocked()) {
+                if (user.getFailedAttempt() < UserService.MAX_FAILED_ATTEMPTS - 1) {
+                    userService.increaseFailedAttempts(user);
+                } else {
+                    userService.lock(user);
+                    exception = new LockedException("Your account has been locked due to 3 failed attempts."
+                            + " It will be unlocked after 30 seconds.");
+                }
+            } else {
+                if (userService.unlockWhenTimeExpired(user)) {
+                    exception = new LockedException("Your account has been unlocked. Please try to login again.");
+                }
+            }
+        }
+
+        super.setDefaultFailureUrl("/login?error");
+        super.onAuthenticationFailure(request, response, exception);
+    }
+}

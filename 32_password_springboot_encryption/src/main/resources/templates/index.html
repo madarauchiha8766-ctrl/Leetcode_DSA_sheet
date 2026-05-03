@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 2rem; margin: 0; }
+        .container { background: white; padding: 2.5rem; border-radius: 10px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 600px; margin: 2rem auto; text-align: center; }
+        h1 { color: #1a1a1a; margin-top: 0; }
+        p { color: #4a4a4a; font-size: 1.1rem; line-height: 1.6; }
+        .logout-btn { display: inline-block; padding: 0.875rem 2rem; background-color: #ef4444; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 1rem; font-weight: 600; margin-top: 1.5rem; transition: background-color 0.15s ease-in-out; }
+        .logout-btn:hover { background-color: #dc2626; }
+        .success-icon { font-size: 4rem; color: #10b981; margin-bottom: 1rem; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="success-icon">✓</div>
+    <h1>Welcome, <span th:text="${#authentication.name}">User</span>!</h1>
+    <p>You have successfully logged into the secure dashboard. This page is protected and only accessible to authenticated users.</p>
+    
+    <form th:action="@{/logout}" method="post">
+        <button type="submit" class="logout-btn">Logout</button>
+    </form>
+</div>
+</body>
+</html>

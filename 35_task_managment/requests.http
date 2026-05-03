@@ -1,0 +1,156 @@
+### Task Manager API - Test Requests
+
+@base = http://localhost:3000
+
+### 1. Health Check
+GET {{base}}
+
+###
+
+### 2. Get All Tasks
+GET {{base}}/tasks
+
+###
+
+### 3. Get Specific Task (ID: 1)
+GET {{base}}/tasks/1
+
+###
+
+### 4. Create a New Task
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Learn Express.js",
+  "description": "Build a REST API with Express and Node.js"
+}
+
+###
+
+### 5. Create Another Task
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Buy groceries",
+  "description": "Milk, bread, eggs, cheese"
+}
+
+###
+
+### 6. Create Task Without Description
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Call mom"
+}
+
+###
+
+### 7. Update Task Details (Title and Description)
+PUT {{base}}/tasks/1
+Content-Type: application/json
+
+{
+  "title": "Master Express.js",
+  "description": "Build production-ready REST APIs with Express"
+}
+
+###
+
+### 8. Update Task Status to Completed
+PUT {{base}}/tasks/1
+Content-Type: application/json
+
+{
+  "status": "completed"
+}
+
+###
+
+### 9. Update Task Status Using PATCH
+PATCH {{base}}/tasks/2/status
+Content-Type: application/json
+
+{
+  "status": "completed"
+}
+
+###
+
+### 10. Update Task Status Back to Pending
+PATCH {{base}}/tasks/1/status
+Content-Type: application/json
+
+{
+  "status": "pending"
+}
+
+###
+
+### 11. Delete a Specific Task (ID: 1)
+DELETE {{base}}/tasks/1
+
+###
+
+### 12. Delete All Completed Tasks
+DELETE {{base}}/tasks
+
+###
+
+### 13. Create Multiple Tasks for Testing
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 1",
+  "description": "First test task"
+}
+
+###
+
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 2",
+  "description": "Second test task"
+}
+
+###
+
+POST {{base}}/tasks
+Content-Type: application/json
+
+{
+  "title": "Task 3",
+  "description": "Third test task"
+}
+
+###
+
+### 14. Mark Multiple Tasks as Completed
+PATCH {{base}}/tasks/5/status
+Content-Type: application/json
+
+{
+  "status": "completed"
+}
+
+###
+
+PATCH {{base}}/tasks/6/status
+Content-Type: application/json
+
+{
+  "status": "completed"
+}
+
+###
+
+### 15. View All Remaining Tasks
+GET {{base}}/tasks
+
+###
