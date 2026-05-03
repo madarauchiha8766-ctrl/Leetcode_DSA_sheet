@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Registration</title>
+  <style>
+    body { font-family: Arial; background: #f4f4f4; }
+    .container {
+      width: 400px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      margin-top: 40px;
+      border-radius: 10px;
+    }
+    input, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 8px;
+    }
+    button {
+      background: blue;
+      color: white;
+      border: none;
+    }
+    li {
+      background: #eee;
+      margin: 5px 0;
+      padding: 8px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>Student Registration</h2>
+
+    <input type="text" id="name" placeholder="Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="text" id="course" placeholder="Course">
+
+    <button onclick="addStudent()">Register</button>
+
+    <h3>Registered Students</h3>
+    <ul id="studentList"></ul>
+  </div>
+
+  <script>
+    const API = "http://localhost:5000";
+
+    function addStudent() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const course = document.getElementById("course").value;
+
+      if (!name || !email || !course) {
+        alert("All fields are required");
+        return;
+      }
+
+      fetch(API + "/add-student", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, course })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message);
+        loadStudents();
+      });
+    }
+
+    function loadStudents() {
+      fetch(API + "/students")
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById("studentList");
+          list.innerHTML = "";
+
+          data.forEach(student => {
+            const li = document.createElement("li");
+            li.innerText = `${student.name} | ${student.email} | ${student.course}`;
+            list.appendChild(li);
+          });
+        });
+    }
+
+    // Load students on page load
+    loadStudents();
+  </script>
+</body>
+</html>

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VIT Learning Components</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            margin-top: 60px;
+        }
+
+        .nav-pills .nav-link {
+            color: white;
+            border-radius: 30px;
+            margin: 5px;
+        }
+
+        .nav-pills .nav-link.active {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .tab-content {
+            margin-top: 30px;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>VIT Learning Components</h2>
+
+    <!-- Pills Navigation -->
+    <ul class="nav nav-pills justify-content-center" id="pills-tab">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#sdp">SDP</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#edi">EDI</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#dt">DT</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#projects">Course Projects</a>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content">
+
+        <!-- SDP -->
+        <div class="tab-pane fade show active" id="sdp">
+            <h4>Skill Development Program (SDP)</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Purpose</h5>
+                        <p>Enhances technical and practical skills required for industry readiness.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Relevance</h5>
+                        <p>Bridges gap between academics and industry expectations.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- EDI -->
+        <div class="tab-pane fade" id="edi">
+            <h4>Entrepreneurship Development Initiative (EDI)</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Purpose</h5>
+                        <p>Encourages entrepreneurial mindset and startup culture.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Relevance</h5>
+                        <p>Helps students build business ideas and innovate solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DT -->
+        <div class="tab-pane fade" id="dt">
+            <h4>Design Thinking (DT)</h4>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Purpose</h5>
+                        <p>Focuses on user-centric problem solving and creativity.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-3">
+                        <h5>Relevance</h5>
+                        <p>Improves innovation and structured thinking approach.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Projects -->
+        <div class="tab-pane fade" id="projects">
+            <h4>Course Projects</h4>
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h5>Mini Projects</h5>
+                        <p>Small scale implementations for concept understanding.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h5>Major Projects</h5>
+                        <p>Comprehensive real-world problem solving projects.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card p-3">
+                        <h5>Industry Exposure</h5>
+                        <p>Hands-on experience aligned with real industry scenarios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- jQuery Enhancements -->
+<script>
+    $(document).ready(function(){
+
+        // Fade animation when switching tabs
+        $('a[data-toggle="pill"]').on('shown.bs.tab', function (e) {
+            var target = $(e.target.getAttribute("href"));
+            target.hide().fadeIn(500);
+        });
+
+    });
+</script>
+
+</body>
+</html>

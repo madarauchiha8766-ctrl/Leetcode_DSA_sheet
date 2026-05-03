@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My CV</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Video Background */
+        .video-bg {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            z-index: -1;
+            object-fit: cover;
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: -1;
+        }
+
+        /* Section styling */
+        section {
+            padding: 80px 0;
+            color: white;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: white;
+        }
+
+        .navbar {
+            background: rgba(0,0,0,0.8);
+        }
+
+        h2 {
+            margin-bottom: 30px;
+        }
+
+        .progress {
+            height: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Video Background -->
+<!-- <video autoplay muted loop class="video-bg">
+    <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+</video> -->
+
+<div class="overlay"></div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="#">My CV</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#menu">
+            ☰
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
+                <li class="nav-item"><a href="#skills" class="nav-link">Skills</a></li>
+                <li class="nav-item"><a href="#projects" class="nav-link">Projects</a></li>
+                <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- About Section -->
+<section id="about">
+    <div class="container">
+        <h2 class="text-center">About Me</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://via.placeholder.com/200" class="img-fluid rounded-circle">
+            </div>
+
+            <div class="col-md-8">
+                <p>
+                    Hello! I am a passionate developer with experience in web development,
+                    machine learning, and IoT projects. I enjoy building efficient and
+                    scalable solutions.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Skills Section -->
+<section id="skills">
+    <div class="container">
+        <h2 class="text-center">Skills</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <p>HTML</p>
+                <div class="progress">
+                    <div class="progress-bar bg-success" style="width:90%"></div>
+                </div>
+
+                <p>CSS</p>
+                <div class="progress">
+                    <div class="progress-bar bg-info" style="width:80%"></div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <p>JavaScript</p>
+                <div class="progress">
+                    <div class="progress-bar bg-warning" style="width:85%"></div>
+                </div>
+
+                <p>Python</p>
+                <div class="progress">
+                    <div class="progress-bar bg-danger" style="width:75%"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+    <div class="container">
+        <h2 class="text-center">Projects</h2>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h4>Inventory System</h4>
+                    <p>Web-based system for managing inventory efficiently.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h4>Soil Mapping</h4>
+                    <p>Machine learning-based soil classification project.</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h4>IoT Menu System</h4>
+                    <p>Smart restaurant ordering system using QR codes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <h2 class="text-center">Contact</h2>
+
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" class="form-control mb-2" placeholder="Name">
+                <input type="email" class="form-control mb-2" placeholder="Email">
+                <textarea class="form-control mb-2" placeholder="Message"></textarea>
+                <button class="btn btn-primary">Send</button>
+            </div>
+
+            <div class="col-md-6">
+                <p>Email: example@gmail.com</p>
+                <p>Phone: +91 XXXXXXXX</p>
+                <p>Location: India</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery Smooth Scroll -->
+<script>
+    $(document).ready(function(){
+        $(".nav-link").click(function(e){
+            e.preventDefault();
+            var target = $(this.hash);
+            $('html, body').animate({
+                scrollTop: target.offset().top - 70
+            }, 800);
+        });
+    });
+</script>
+
+</body>
+</html>

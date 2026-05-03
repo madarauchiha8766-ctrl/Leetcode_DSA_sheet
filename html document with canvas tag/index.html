@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas Drawing App</title>
+
+<style>
+    body {
+        font-family: Arial;
+        margin: 0;
+        text-align: center;
+        background: #f4f6f9;
+    }
+
+    h2 {
+        margin: 15px;
+    }
+
+    .toolbar {
+        margin: 10px;
+    }
+
+    button {
+        padding: 10px;
+        margin: 5px;
+        border: none;
+        background: #007bff;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    canvas {
+        border: 2px solid #333;
+        width: 90%;
+        max-width: 800px;
+        height: 500px;
+        background: white;
+        touch-action: none;
+    }
+</style>
+</head>
+
+<body>
+
+<h2>Canvas Drawing (Line & Rectangle)</h2>
+
+<div class="toolbar">
+    <button onclick="setMode('line')">Draw Line</button>
+    <button onclick="setMode('rect')">Draw Rectangle</button>
+    <button onclick="clearCanvas()">Clear</button>
+</div>
+
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+// Make canvas responsive
+function resizeCanvas() {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+let mode = "line";
+let startX = 0, startY = 0;
+let isDrawing = false;
+
+// Set drawing mode
+function setMode(m) {
+    mode = m;
+}
+
+// Clear canvas
+function clearCanvas() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// Mouse Down → start point
+canvas.addEventListener("mousedown", function(e) {
+    const rect = canvas.getBoundingClientRect();
+    startX = e.clientX - rect.left;
+    startY = e.clientY - rect.top;
+    isDrawing = true;
+});
+
+// Mouse Up → draw shape
+canvas.addEventListener("mouseup", function(e) {
+    if (!isDrawing) return;
+
+    const rect = canvas.getBoundingClientRect();
+    const endX = e.clientX - rect.left;
+    const endY = e.clientY - rect.top;
+
+    ctx.beginPath();
+
+    if (mode === "line") {
+        ctx.moveTo(startX, startY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+    }
+
+    if (mode === "rect") {
+        ctx.rect(startX, startY, endX - startX, endY - startY);
+        ctx.stroke();
+    }
+
+    isDrawing = false;
+});
+</script>
+
+</body>
+</html>
