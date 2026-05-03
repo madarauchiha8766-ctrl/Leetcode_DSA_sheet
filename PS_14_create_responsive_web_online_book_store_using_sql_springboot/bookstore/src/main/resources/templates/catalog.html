@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalog | Lumina Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">Lumina Books</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/catalog" style="font-weight: bold; color: var(--primary);">Catalog</a>
+            <a href="/book/add">Add Book</a>
+            <a href="/cart">Cart</a>
+            <div th:if="${!loggedIn}" style="margin-left: 1rem;">
+                <a href="/login" class="btn btn-outline" style="margin-right: 1rem;">Login</a>
+                <a href="/register" class="btn btn-primary">Sign Up</a>
+            </div>
+            <div th:if="${loggedIn}" style="display: flex; align-items: center; gap: 1rem; margin-left: 1rem;">
+                <a href="/logout" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="catalog-container">
+        <div class="catalog-header">
+            <h2>Our Collection</h2>
+            <p>Handpicked selections for your reading pleasure</p>
+        </div>
+
+        <div class="book-grid">
+            <!-- Iterate over books -->
+            <div class="book-card" th:each="book : ${books}">
+                <img th:src="${book.imageUrl}" alt="Book Cover" class="book-img">
+                <div class="book-info">
+                    <div class="book-title" th:text="${book.title}">Book Title</div>
+                    <div class="book-author" th:text="${book.author}">Author Name</div>
+                    <div class="book-desc" th:text="${book.description}">A brief description...</div>
+                    <div class="book-price" th:text="'$' + ${book.price}">$0.00</div>
+                    <form th:action="@{/cart/add/{id}(id=${book.id})}" method="post" style="width: 100%;">
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+            <!-- Empty state -->
+            <div th:if="${#lists.isEmpty(books)}" style="grid-column: 1 / -1; text-align: center; padding: 4rem; color: var(--text-muted);">
+                <h3>No books found in the catalog.</h3>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Lumina Books. All rights reserved.</p>
+    </footer>
+</body>
+</html>

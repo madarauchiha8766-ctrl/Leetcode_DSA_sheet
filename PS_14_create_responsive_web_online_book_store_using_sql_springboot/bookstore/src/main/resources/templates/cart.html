@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart | Lumina Books</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .cart-table th, .cart-table td {
+            padding: 1.5rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        .cart-table th {
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+        .cart-summary {
+            margin-top: 2rem;
+            text-align: right;
+            padding: 2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">Lumina Books</a>
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/catalog">Catalog</a>
+            <a href="/book/add">Add Book</a>
+            <a href="/cart" style="font-weight: bold; color: var(--primary);">Cart</a>
+            <div th:if="${!loggedIn}" style="margin-left: 1rem;">
+                <a href="/login" class="btn btn-outline" style="margin-right: 1rem;">Login</a>
+                <a href="/register" class="btn btn-primary">Sign Up</a>
+            </div>
+            <div th:if="${loggedIn}" style="display: flex; align-items: center; gap: 1rem; margin-left: 1rem;">
+                <a href="/logout" class="btn btn-outline">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="catalog-container">
+        <div class="catalog-header">
+            <h2>Your Shopping Cart</h2>
+            <p>Review the items you've selected</p>
+        </div>
+
+        <div th:if="${#lists.isEmpty(cart)}" style="text-align: center; padding: 4rem; color: var(--text-muted); background: var(--card-bg); border-radius: 12px; border: 1px solid var(--border);">
+            <h3>Your cart is empty.</h3>
+            <p style="margin-top: 1rem; margin-bottom: 2rem;">Looks like you haven't added any books yet.</p>
+            <a href="/catalog" class="btn btn-primary">Continue Shopping</a>
+        </div>
+
+        <div th:if="${!#lists.isEmpty(cart)}">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Book</th>
+                        <th>Author</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book, iterStat : ${cart}">
+                        <td th:text="${book.title}" style="font-weight: 600;">Title</td>
+                        <td th:text="${book.author}" style="color: var(--text-muted);">Author</td>
+                        <td th:text="'$' + ${book.price}" style="color: var(--primary); font-weight: 600;">$0.00</td>
+                        <td>
+                            <form th:action="@{/cart/remove/{index}(index=${iterStat.index})}" method="post">
+                                <button type="submit" class="btn btn-outline" style="padding: 0.4rem 0.8rem; font-size: 0.85rem;">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1rem;">Total: <span th:text="'$' + ${#numbers.formatDecimal(total, 1, 2)}" style="color: var(--primary);">0.00</span></h3>
+                <button class="btn btn-primary" style="padding: 0.8rem 2rem; font-size: 1.1rem;">Proceed to Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Lumina Books. All rights reserved.</p>
+    </footer>
+</body>
+</html>
